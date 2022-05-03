@@ -1,0 +1,39 @@
+<h1>Your selection has <span id="chars">X</span> character(s)</h1>
+
+<button id="makeUppercase">Make it uppercase</button>
+<button id="makeLowercase">Make it lowercase</button>
+<button id="makeCapital">Make it capital</button>
+<button id="makeRed">Make it red</button>
+<button id="makeBlack">Make it black</button>
+<button id="increaseFontSize">Increase font size</button>
+<button id="decreaseFontSize">Decrease font size</button>
+
+<style>
+    button {
+        margin-right: 10px;
+        margin-bottom: 10px;
+    }
+</style>
+
+<script>
+    const chars = document.querySelector('#chars');
+    const makeUppercase = document.querySelector('#makeUppercase');
+    const makeLowercase = document.querySelector('#makeLowercase');
+    const makeCapital = document.querySelector('#makeCapital');
+    const makeRed = document.querySelector('#makeRed');
+    const makeBlack = document.querySelector('#makeBlack');
+    const decreaseFontSize = document.querySelector('#decreaseFontSize');
+    const increaseFontSize = document.querySelector('#increaseFontSize');
+
+    onmessage = event => chars.innerHTML = event.data.pluginMessage.text.length;
+
+    const pushMessage = (type) => parent.postMessage({ pluginMessage: { type } }, '*');
+
+    makeUppercase.addEventListener('click', () => pushMessage('makeUppercase'));
+    makeLowercase.addEventListener('click', () => pushMessage('makeLowercase'));
+    makeCapital.addEventListener('click', () => pushMessage('makeCapital'));
+    makeRed.addEventListener('click', () => pushMessage('makeRed'));
+    makeBlack.addEventListener('click', () => pushMessage('makeBlack'));
+    decreaseFontSize.addEventListener('click', () => pushMessage('decreaseFontSize'));
+    increaseFontSize.addEventListener('click', () => pushMessage('increaseFontSize'));
+</script>
